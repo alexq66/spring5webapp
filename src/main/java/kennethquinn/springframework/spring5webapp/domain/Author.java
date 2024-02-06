@@ -1,9 +1,6 @@
 package kennethquinn.springframework.spring5webapp.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Set;
 
@@ -18,6 +15,7 @@ public class Author {
     private Long id;
     private String firstName;
     private String lastName;
+    @ManyToMany(mappedBy = "authors")
     private Set<Book> book;
 
     public Author() {
