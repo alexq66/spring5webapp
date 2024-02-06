@@ -5,6 +5,7 @@ import kennethquinn.springframework.spring5webapp.domain.Book;
 import kennethquinn.springframework.spring5webapp.domain.Publisher;
 import kennethquinn.springframework.spring5webapp.repositories.AuthorRepository;
 import kennethquinn.springframework.spring5webapp.repositories.BookRepository;
+import kennethquinn.springframework.spring5webapp.repositories.PublisherRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -16,10 +17,12 @@ public class BootStrapData implements CommandLineRunner {
 
     private final AuthorRepository authorRepository;
     private final BookRepository bookRepository;
+    private final Object publisherRepository;
 
-    public BootStrapData(AuthorRepository authorRepository, BookRepository bookRepository) {
+    public BootStrapData(AuthorRepository authorRepository, BookRepository bookRepository, PublisherRepository publisherRepository) {
         this.authorRepository = authorRepository;
         this.bookRepository = bookRepository;
+        this.publisherRepository = publisherRepository;
     }
 
     @Override
@@ -27,7 +30,6 @@ public class BootStrapData implements CommandLineRunner {
 
         Author eric = new Author("Eric", "Evans");
         Book ddd = new Book("Domain Driven Design", "123123");
-        Publisher austinPublisher = new Publisher("123 Main St", "Austin", "Texas","78681");
         eric.getBook().add(ddd);
         ddd.getAuthors().add(eric);
 
@@ -41,9 +43,18 @@ public class BootStrapData implements CommandLineRunner {
 
         authorRepository.save(rod);
         bookRepository.save(noEJB);
+
+        Publisher publisher = new Publisher("Austin Publishing", "123 Main St", "Austin", "Texas", "78681");
+        ddd.setPublisher(publisher);
+        noEJB.setPublisher(publisher);
+        publisher.getBooks().add(ddd);
+        publisher.getBooks().add(noEJB);
+
+
         System.out.println("Started in Bootstrap");
         System.out.println("Number of books: " + bookRepository.count());
         System.out.println("Number of Authors: " + authorRepository.count());
+        System.out.println("Publisher Number of Books: " + publisher.getBooks().size());
     }
 
 }

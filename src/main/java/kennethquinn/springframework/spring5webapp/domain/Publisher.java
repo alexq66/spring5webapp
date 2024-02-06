@@ -2,28 +2,33 @@ package kennethquinn.springframework.spring5webapp.domain;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
 /**
  * Created by Kenneth Quinn on 2/5/2024
  */
 @Entity
 public class Publisher {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    private String name;
     private String address;
     private String city;
     private String state;
     private String zip;
     @OneToMany
-    private Set<Publisher> publisher;
+    @JoinColumn(name = "publisher_id")
+    private Set<Book> books = new HashSet<>();
 
     public Publisher() {
     }
 
-    public Publisher(String address, String city, String state, String zip) {
+    public Publisher(String name, String address, String city, String state, String zip) {
+        this.name = name;
         this.address = address;
         this.city = city;
         this.state = state;
@@ -36,6 +41,14 @@ public class Publisher {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getAddress() {
@@ -70,23 +83,24 @@ public class Publisher {
         this.zip = zip;
     }
 
-    public Set<Publisher> getPublisher() {
-        return publisher;
+    public Set<Book> getBooks() {
+        return books;
     }
 
-    public void setPublisher(Set<Publisher> publisher) {
-        this.publisher = publisher;
+    public void setBooks(Set<Book> books) {
+        this.books = books;
     }
 
     @Override
     public String toString() {
         return "Publisher{" +
                 "id=" + id +
+                ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
                 ", zip='" + zip + '\'' +
-                ", publisher=" + publisher +
+                ", books=" + books +
                 '}';
     }
 
