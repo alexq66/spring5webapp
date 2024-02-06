@@ -1,11 +1,21 @@
 package kennethquinn.springframework.spring5webapp.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 import java.util.Set;
 
 /**
  * Created by Kenneth Quinn on 2/5/2024
  */
+@Entity
 public class Author {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String firstName;
     private String lastName;
     private Set<Book> book;
@@ -17,6 +27,14 @@ public class Author {
         this.firstName = firstName;
         this.lastName = lastName;
         this.book = book;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
