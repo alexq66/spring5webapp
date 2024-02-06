@@ -2,6 +2,7 @@ package kennethquinn.springframework.spring5webapp.bootstrap;
 
 import kennethquinn.springframework.spring5webapp.domain.Author;
 import kennethquinn.springframework.spring5webapp.domain.Book;
+import kennethquinn.springframework.spring5webapp.domain.Publisher;
 import kennethquinn.springframework.spring5webapp.repositories.AuthorRepository;
 import kennethquinn.springframework.spring5webapp.repositories.BookRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -26,6 +27,7 @@ public class BootStrapData implements CommandLineRunner {
 
         Author eric = new Author("Eric", "Evans");
         Book ddd = new Book("Domain Driven Design", "123123");
+        Publisher austinPublisher = new Publisher("123 Main St", "Austin", "Texas","78681");
         eric.getBook().add(ddd);
         ddd.getAuthors().add(eric);
 
