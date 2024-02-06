@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.Set;
 /**
  * Created by Kenneth Quinn on 2/5/2024
- */
+ **/
 @Entity
 public class Book {
 
