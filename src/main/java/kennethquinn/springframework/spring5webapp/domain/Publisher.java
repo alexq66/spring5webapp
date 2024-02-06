@@ -1,5 +1,6 @@
 package kennethquinn.springframework.spring5webapp.domain;
 
+
 import jakarta.persistence.*;
 
 import java.util.HashSet;

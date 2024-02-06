@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+
 /**
  * Created by Kenneth Quinn on 2/5/2024
  **/
@@ -14,10 +15,13 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String title;
     private String isbn;
+
     @ManyToOne
     private Publisher publisher;
+
     @ManyToMany
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
@@ -70,7 +74,6 @@ public class Book {
     public void setAuthors(Set<Author> authors) {
         this.authors = authors;
     }
-
 
     @Override
     public String toString() {
